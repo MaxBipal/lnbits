@@ -291,6 +291,9 @@ class EnvSettings(LNbitsSettings):
     lnbits_extensions_path: str = Field(default="lnbits")
     super_user: str = Field(default="")
     version: str = Field(default="0.0.0")
+    login_secret: str = Field(
+        default="xxxxx33497535c9d8f344cd5e0d85df82d7ccd6a4dbyyyyy"
+    )
 
     @property
     def has_default_extension_path(self) -> bool:
