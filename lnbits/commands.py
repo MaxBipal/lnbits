@@ -28,22 +28,11 @@ def db():
     """
 
 
-def get_super_user() -> str:
-    """Get the superuser"""
-    with open(Path(settings.lnbits_data_folder) / ".super_user", "r") as file:
-        return file.readline()
-
-
 @lnbits_cli.command("superuser")
 def superuser():
     """Prints the superuser"""
-    click.echo(get_super_user())
-
-
-@lnbits_cli.command("superuser-url")
-def superuser_url():
-    """Prints the superuser"""
-    click.echo(f"http://{settings.host}:{settings.port}/wallet?usr={get_super_user()}")
+    with open(Path(settings.lnbits_data_folder) / ".super_user", "r") as file:
+        click.echo(file.readline())
 
 
 @lnbits_cli.command("delete-settings")

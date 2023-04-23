@@ -36,7 +36,7 @@ from lnbits.wallets import get_wallet_class, set_wallet_class
 from .commands import db_versions, load_disabled_extension_list, migrate_databases
 from .core import init_core_routers
 from .core.db import core_app_extra
-from .core.services import check_admin_settings, check_webpush_settings
+from .core.services import check_admin_settings, check_webpush_settings, login_manager
 from .core.views.api import add_installed_extension
 from .core.views.generic import update_installed_extension_state
 from .extension_manager import Extension, InstallableExtension, get_valid_extensions
@@ -75,6 +75,8 @@ def create_app() -> FastAPI:
     # Allow registering new extensions routes without direct access to the `app` object
     setattr(core_app_extra, "register_new_ext_routes", register_new_ext_routes(app))
     setattr(core_app_extra, "register_new_ratelimiter", register_new_ratelimiter(app))
+
+    login_manager.useRequest(app)
 
     app.mount("/static", StaticFiles(packages=[("lnbits", "static")]), name="static")
     app.mount(
