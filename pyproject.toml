@@ -135,6 +135,7 @@ exclude = [
     "lnbits/static",
     "lnbits/extensions",
     "lnbits/wallets/lnd_grpc_files",
+    "lnbits/wallets/breez_sdk_files",
     ".bzr",
     ".direnv",
     ".eggs",

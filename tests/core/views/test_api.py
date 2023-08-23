@@ -305,7 +305,8 @@ async def test_api_payment_with_key(invoice, inkey_headers_from):
 
 # check POST /api/v1/payments: invoice creation with a description hash
 @pytest.mark.skipif(
-    WALLET.__class__.__name__ in ["CoreLightningWallet", "CoreLightningRestWallet"],
+    WALLET.__class__.__name__
+    in ["CoreLightningWallet", "CoreLightningRestWallet", "BreezSdkWallet"],
     reason="wallet does not support description_hash",
 )
 @pytest.mark.asyncio
@@ -326,7 +327,7 @@ async def test_create_invoice_with_description_hash(client, inkey_headers_to):
 
 
 @pytest.mark.skipif(
-    WALLET.__class__.__name__ in ["CoreLightningRestWallet"],
+    WALLET.__class__.__name__ in ["CoreLightningRestWallet", "BreezSdkWallet"],
     reason="wallet does not support unhashed_description",
 )
 @pytest.mark.asyncio

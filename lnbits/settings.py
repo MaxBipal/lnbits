@@ -196,6 +196,12 @@ class LnTipsFundingSource(LNbitsSettings):
     lntips_invoice_key: Optional[str] = Field(default=None)
 
 
+class BreezSdkFundingSource(LNbitsSettings):
+    breez_api_key: Optional[str] = Field(default=None)
+    breez_greenlight_seed: Optional[str] = Field(default=None)
+    breez_greenlight_invite_code: Optional[str] = Field(default=None)
+
+
 # todo: must be extracted
 class BoltzExtensionSettings(LNbitsSettings):
     boltz_network: str = Field(default="main")
@@ -221,6 +227,7 @@ class FundingSourcesSettings(
     OpenNodeFundingSource,
     SparkFundingSource,
     LnTipsFundingSource,
+    BreezSdkFundingSource,
 ):
     lnbits_backend_wallet_class: str = Field(default="VoidWallet")
 
@@ -297,6 +304,7 @@ class SuperUserSettings(LNbitsSettings):
             "LNPayWallet",
             "LNbitsWallet",
             "OpenNodeWallet",
+            "BreezSdkWallet",
         ]
     )
 

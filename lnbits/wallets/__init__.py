@@ -6,6 +6,7 @@ from typing import Optional
 from lnbits.settings import settings
 from lnbits.wallets.base import Wallet
 
+from .breez import BreezSdkWallet
 from .cliche import ClicheWallet
 from .corelightning import CoreLightningWallet
 from .corelightning import CoreLightningWallet as CLightningWallet
