@@ -72,14 +72,23 @@ class BreezSdkWallet(Wallet):
         if description_hash or unhashed_description:
             raise Unsupported("description_hash and unhashed_description")
 
-        invoice: breez_sdk.ReceivePaymentResponse = self.sdk_services.receive_payment(
-            breez_sdk.ReceivePaymentRequest(
-                amount,
-                memo,
-                preimage=kwargs.get("preimage"),
-                opening_fee_params=None,
+        breez_invoice: breez_sdk.ReceivePaymentResponse = (
+            self.sdk_services.receive_payment(
+                breez_sdk.ReceivePaymentRequest(
+                    amount,
+                    memo,
+                    preimage=kwargs.get("preimage"),
+                    opening_fee_params=None,
+                )
             )
         )
+
+        # if description_hash is set, we deserialize the inovice, add it and serialize and sign it again
+        if description_hash:
+            invoice_object = lnbits_bolt11.decode(breez_invoice.ln_invoice.bolt11)
+            invoice_object.description_hash = description_hash.decode("utf-8")
+            invoice_object.description = None
+
         return InvoiceResponse(
             True, invoice.ln_invoice.payment_hash, invoice.ln_invoice.bolt11, None
         )
