@@ -69,8 +69,8 @@ class BreezSdkWallet(Wallet):
         unhashed_description: Optional[bytes] = None,
         **kwargs,
     ) -> InvoiceResponse:
-        if description_hash or unhashed_description:
-            raise Unsupported("description_hash and unhashed_description")
+        # if description_hash or unhashed_description:
+        #     raise Unsupported("description_hash and unhashed_description")
 
         breez_invoice: breez_sdk.ReceivePaymentResponse = (
             self.sdk_services.receive_payment(
