@@ -83,14 +83,11 @@ class BreezSdkWallet(Wallet):
             )
         )
 
-        # if description_hash is set, we deserialize the inovice, add it and serialize and sign it again
-        if description_hash:
-            invoice_object = lnbits_bolt11.decode(breez_invoice.ln_invoice.bolt11)
-            invoice_object.description_hash = description_hash.decode("utf-8")
-            invoice_object.description = None
-
         return InvoiceResponse(
-            True, invoice.ln_invoice.payment_hash, invoice.ln_invoice.bolt11, None
+            True,
+            breez_invoice.ln_invoice.payment_hash,
+            breez_invoice.ln_invoice.bolt11,
+            None,
         )
 
     async def pay_invoice(self, bolt11: str, fee_limit_msat: int) -> PaymentResponse:
