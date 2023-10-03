@@ -8,7 +8,6 @@
     "/static/vendor/VueQrcodeReader.umd.js",
     "/static/vendor/vue-qrcode.js",
     "/static/vendor/vuex.js",
-    "/static/vendor/quasar.ie.polyfills.umd.min.js",
     "/static/vendor/quasar.umd.js",
     "/static/vendor/Chart.bundle.js",
     "/static/vendor/vue-i18n.js",
