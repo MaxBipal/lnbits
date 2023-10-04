@@ -1,6 +1,6 @@
 /* global _, Vue, moment, LNbits, EventHub, decryptLnurlPayAES */
 
-Vue.component('lnbits-fsat', {
+window.app.component('lnbits-fsat', {
   props: {
     amount: {
       type: Number,
@@ -15,7 +15,7 @@ Vue.component('lnbits-fsat', {
   }
 })
 
-Vue.component('lnbits-wallet-list', {
+window.app.component('lnbits-wallet-list', {
   data: function () {
     return {
       user: null,
@@ -99,11 +99,11 @@ Vue.component('lnbits-wallet-list', {
     if (window.wallet) {
       this.activeWallet = LNbits.map.wallet(window.wallet)
     }
-    EventHub.$on('update-wallet-balance', this.updateWalletBalance)
+    window.EventHub.$on('update-wallet-balance', this.updateWalletBalance)
   }
 })
 
-Vue.component('lnbits-extension-list', {
+window.app.component('lnbits-extension-list', {
   data: function () {
     return {
       extensions: [],
@@ -177,7 +177,7 @@ Vue.component('lnbits-extension-list', {
   }
 })
 
-Vue.component('lnbits-admin-ui', {
+window.app.component('lnbits-admin-ui', {
   props: ['showNode'],
   data: function () {
     return {
@@ -214,7 +214,7 @@ Vue.component('lnbits-admin-ui', {
   }
 })
 
-Vue.component('lnbits-payment-details', {
+window.app.component('lnbits-payment-details', {
   props: ['payment'],
   mixins: [windowMixin],
   data: function () {
@@ -327,7 +327,7 @@ Vue.component('lnbits-payment-details', {
   }
 })
 
-Vue.component('lnbits-lnurlpay-success-action', {
+window.app.component('lnbits-lnurlpay-success-action', {
   props: ['payment', 'success_action'],
   data() {
     return {
@@ -356,7 +356,7 @@ Vue.component('lnbits-lnurlpay-success-action', {
   }
 })
 
-Vue.component('lnbits-notifications-btn', {
+window.app.component('lnbits-notifications-btn', {
   mixins: [windowMixin],
   props: ['pubkey'],
   data() {
@@ -568,3 +568,7 @@ Vue.component('lnbits-notifications-btn', {
     }
   }
 })
+
+window.app.use(Quasar)
+window.app.use(window.i18n)
+window.app.mount('#vue')

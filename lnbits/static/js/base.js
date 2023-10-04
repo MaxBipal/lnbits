@@ -1,15 +1,13 @@
 /* globals crypto, moment, Vue, axios, Quasar, _ */
 
-Vue.use(VueI18n)
-
 window.LOCALE = 'en'
-window.i18n = new VueI18n({
+window.i18n = new VueI18n.createI18n({
   locale: window.LOCALE,
   fallbackLocale: window.LOCALE,
   messages: window.localisation
 })
 
-window.EventHub = new Vue()
+window.EventHub = Vue.createApp()
 window.LNbits = {
   api: {
     request: function (method, url, apiKey, data) {

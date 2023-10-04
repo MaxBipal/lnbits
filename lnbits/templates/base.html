@@ -18,8 +18,8 @@
     {% endif %} {% block head_scripts %}{% endblock %}
   </head>
 
-  <body data-theme="bitcoin">
-    <q-layout id="vue" view="hHh lpR lfr" v-cloak>
+  <body data-theme="bitcoin" id="vue">
+    <q-layout view="hHh lpR lfr" v-cloak>
       <q-header bordered class="bg-marginal-bg">
         <q-toolbar>
           {% block drawer_toggle %}
@@ -293,7 +293,7 @@
     <script src="{{ url }}"></script>
     {% endfor %}
     <!---->
-    <script type="text/javascript">
+    <script>
       const SITE_DESCRIPTION = {{ SITE_DESCRIPTION | tojson}}
       const themes = {{ LNBITS_THEME_OPTIONS | tojson }}
       const LNBITS_DENOMINATION = {{ LNBITS_DENOMINATION | tojson }}
@@ -318,5 +318,6 @@
       ]
     </script>
     {% block scripts %}{% endblock %}
+    <script src="/static/js/components.js"></script>
   </body>
 </html>

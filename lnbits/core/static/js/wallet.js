@@ -1,7 +1,7 @@
 /* globals windowMixin, decode, Vue, VueQrcodeReader, VueQrcode, Quasar, LNbits, _, EventHub, Chart, decryptLnurlPayAES */
 
-Vue.component(VueQrcode.name, VueQrcode)
-Vue.use(VueQrcodeReader)
+// Vue.component(VueQrcode.name, VueQrcode)
+// Vue.use(VueQrcodeReader)
 
 function generateChart(canvas, rawData) {
   const data = rawData.reduce(
@@ -85,8 +85,7 @@ function generateChart(canvas, rawData) {
   })
 }
 
-new Vue({
-  el: '#vue',
+window.app = Vue.createApp({
   mixins: [windowMixin],
   data: function () {
     return {
@@ -792,7 +791,7 @@ new Vue({
     fetchBalance: function () {
       LNbits.api.getWallet(this.g.wallet).then(response => {
         this.balance = Math.round(response.data.balance / 1000)
-        EventHub.$emit('update-wallet-balance', [
+        window.EventHub.$emit('update-wallet-balance', [
           this.g.wallet.id,
           this.balance
         ])
