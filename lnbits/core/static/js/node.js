@@ -4,7 +4,7 @@ function shortenNodeId(nodeId) {
     : '...'
 }
 
-Vue.component('lnbits-node-ranks', {
+window.app.component('lnbits-node-ranks', {
   props: ['ranks'],
   data: function () {
     return {
@@ -35,7 +35,7 @@ Vue.component('lnbits-node-ranks', {
   `
 })
 
-Vue.component('lnbits-channel-stats', {
+window.app.component('lnbits-channel-stats', {
   props: ['stats'],
   data: function () {
     return {
@@ -71,7 +71,7 @@ Vue.component('lnbits-channel-stats', {
   }
 })
 
-Vue.component('lnbits-stat', {
+window.app.component('lnbits-stat', {
   props: ['title', 'amount', 'msat', 'btc'],
   computed: {
     value: function () {
@@ -99,7 +99,7 @@ Vue.component('lnbits-stat', {
   `
 })
 
-Vue.component('lnbits-node-qrcode', {
+window.app.component('lnbits-node-qrcode', {
   props: ['info'],
   mixins: [windowMixin],
   template: `
@@ -132,7 +132,7 @@ Vue.component('lnbits-node-qrcode', {
   `
 })
 
-Vue.component('lnbits-node-info', {
+window.app.component('lnbits-node-info', {
   props: ['info'],
   data() {
     return {
@@ -173,6 +173,96 @@ Vue.component('lnbits-node-info', {
       <q-dialog v-model="showDialog">
         <lnbits-node-qrcode :info='info'></lnbits-node-qrcode>
       </q-dialog>
+    </div>
+  `
+})
+
+window.app.component('lnbits-stat', {
+  props: ['title', 'amount', 'msat', 'btc'],
+  computed: {
+    value: function () {
+      return (
+        this.amount ??
+        (this.btc
+          ? LNbits.utils.formatSat(this.btc)
+          : LNbits.utils.formatMsat(this.msat))
+      )
+    }
+  },
+  template: `
+    <q-card>
+    <q-card-section>
+      <div class='text-overline text-primary'>
+        {{ title }}
+      </div>
+      <div>
+        <span class='text-h4 text-bold q-my-none'>{{ value }}</span>
+        <span class='text-h5' v-if='msat != undefined'>sats</span>
+        <span class='text-h5' v-if='btc != undefined'>BTC</span>
+      </div>
+    </q-card-section>
+    </q-card>
+  `
+})
+
+window.app.component('lnbits-channel-balance', {
+  props: ['balance', 'color'],
+  methods: {
+    formatMsat: function (msat) {
+      return LNbits.utils.formatMsat(msat)
+    }
+  },
+  template: `
+    <div>
+        <div class="row items-center justify-between">
+          <span class="text-weight-thin">
+            Local: {{ formatMsat(balance.local_msat) }}
+            sats
+          </span>
+          <span class="text-weight-thin">
+            Remote: {{ formatMsat(balance.remote_msat) }}
+            sats
+          </span>
+        </div>
+
+        <q-linear-progress
+          rounded
+          size="25px"
+          :value="balance.local_msat / balance.total_msat"
+          :color="color"
+          :style="\`color: #\${this.color}\`"
+        >
+          <div class="absolute-full flex flex-center">
+            <q-badge
+              color="white"
+              text-color="accent"
+              :label="formatMsat(balance.total_msat) + ' sats'"
+            >
+              {{ balance.alias }}
+            </q-badge>
+          </div>
+        </q-linear-progress>
+    </div>
+  `
+})
+
+window.app.component('lnbits-date', {
+  props: ['ts'],
+  computed: {
+    date: function () {
+      return Quasar.utils.date.formatDate(
+        new Date(this.ts * 1000),
+        'YYYY-MM-DD HH:mm'
+      )
+    },
+    dateFrom: function () {
+      return moment(this.date).fromNow()
+    }
+  },
+  template: `
+    <div>
+      <q-tooltip>{{ this.date }}</q-tooltip>
+      {{ this.dateFrom }}
     </div>
   `
 })

@@ -88,8 +88,8 @@ window.app.component('lnbits-wallet-list', {
     createWallet: function () {
       LNbits.api.createWallet(this.user.wallets[0], this.walletName)
     },
-    updateWalletBalance: function (payload) {
-      this.activeBalance = payload
+    updateWalletBalance: function (e) {
+      this.activeBalance = e.detail
     }
   },
   created: function () {
@@ -99,7 +99,7 @@ window.app.component('lnbits-wallet-list', {
     if (window.wallet) {
       this.activeWallet = LNbits.map.wallet(window.wallet)
     }
-    window.EventHub.$on('update-wallet-balance', this.updateWalletBalance)
+    document.addEventListener('updateWalletBalance', this.updateWalletBalance)
   }
 })
 

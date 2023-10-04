@@ -791,10 +791,11 @@ window.app = Vue.createApp({
     fetchBalance: function () {
       LNbits.api.getWallet(this.g.wallet).then(response => {
         this.balance = Math.round(response.data.balance / 1000)
-        window.EventHub.$emit('update-wallet-balance', [
-          this.g.wallet.id,
-          this.balance
-        ])
+        document.dispatchEvent(
+          new CustomEvent('updateWalletBalance', {
+            detail: [this.g.wallet.id, this.balance]
+          })
+        )
       })
     },
     exportCSV: function () {

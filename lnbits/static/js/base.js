@@ -7,7 +7,6 @@ window.i18n = new VueI18n.createI18n({
   messages: window.localisation
 })
 
-window.EventHub = Vue.createApp()
 window.LNbits = {
   api: {
     request: function (method, url, apiKey, data) {
@@ -244,7 +243,7 @@ window.LNbits = {
   },
   utils: {
     confirmDialog: function (msg) {
-      return Quasar.plugins.Dialog.create({
+      return Quasar.Dialog.create({
         message: msg,
         ok: {
           flat: true,
@@ -283,7 +282,7 @@ window.LNbits = {
         401: 'warning',
         500: 'negative'
       }
-      Quasar.plugins.Notify.create({
+      Quasar.Notify.create({
         timeout: 5000,
         type: types[error.response.status] || 'warning',
         message:
@@ -349,7 +348,7 @@ window.LNbits = {
       )
 
       if (status !== true) {
-        Quasar.plugins.Notify.create({
+        Quasar.Notify.create({
           message: 'Browser denied file download...',
           color: 'negative',
           icon: null
