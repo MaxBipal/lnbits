@@ -81,6 +81,7 @@
       "/static/js/base.js",
       "/static/js/components.js",
       "/static/js/components/lnbits-funding-sources.js",
+      "/static/js/components/extension-settings.js",
       "/static/js/bolt11-decoder.js"
     ],
     "css": [
