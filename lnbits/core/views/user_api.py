@@ -69,7 +69,7 @@ async def register_endpoint(data: CreateUser, response: Response) -> JSONRespons
                     }
                 ]
             },
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_401_UNAUTHORIZED,
         )
     try:
         user = await create_user(data)
