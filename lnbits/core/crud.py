@@ -29,14 +29,14 @@ from .models import (
     User,
     Wallet,
     WebPushSubscription,
-    createUser,
+    CreateUser,
 )
 
 # accounts
 # --------
 
 
-async def create_user(data: createUser) -> User:
+async def create_user(data: CreateUser) -> User:
     if await get_account_by_email(data.email):
         raise Exception("user exists")
 
