@@ -4,7 +4,7 @@ import importlib
 import importlib.metadata
 import inspect
 import json
-from os import path
+from os import path, urandom
 from sqlite3 import Row
 from typing import Any, List, Optional
 
@@ -291,9 +291,7 @@ class EnvSettings(LNbitsSettings):
     lnbits_extensions_path: str = Field(default="lnbits")
     super_user: str = Field(default="")
     version: str = Field(default="0.0.0")
-    login_secret: str = Field(
-        default="xxxxx33497535c9d8f344cd5e0d85df82d7ccd6a4dbyyyyy"
-    )
+    login_secret: str = Field(default=urandom(24).hex())
 
     @property
     def has_default_extension_path(self) -> bool:
